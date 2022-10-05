@@ -25,6 +25,18 @@ fn discover_u_group(n: i32) -> Vec<i32> {
     u_group
 }
 
+// Discovers U_k(n) given U(n)
+fn find_u_k_group(u_grp: &[i32], k: i32) -> Vec<i32> {
+    let mut u_k_group = Vec::new();
+    for i in u_grp {
+        if i % k == 1 {
+            u_k_group.push(*i);
+        }
+    }
+    u_k_group.sort();
+    u_k_group
+}
+
 // uses a generator to generate the powers of a number
 fn discover_group_generator(mod_n: i32, generator: i32) -> Vec<i32> {
     let mut group = Vec::new();
@@ -39,6 +51,7 @@ fn discover_group_generator(mod_n: i32, generator: i32) -> Vec<i32> {
 
 // usage: <command> <modulo n> <optional: generator>
 fn main() {
+    // todo: use a proper argument parser, this is such a mess
     let modulo_n = env::args().nth(1).expect("Please provide the n modulo").parse::<i32>().expect("Please provide a valid integer for MOD_N");
     let generator = env::args().nth(2);
     
